@@ -1,0 +1,193 @@
+:root {
+    --gold: #c5a059;
+    --dark: #161616;
+    --light-bg: #fffdfa;
+    --card-bg: #ffffff;
+    --text-muted: #666666;
+    --bezier: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+    background-color: var(--light-bg);
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.experience-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 24px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header span {
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.section-header h2 {
+    font-size: 2.4rem;
+    color: var(--dark);
+    margin: 8px 0 12px 0;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive Grid Array Layout (Mobile First) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+/* Tablet Matrix Breakpoint */
+@media (min-width: 640px) {
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Desktop Matrix Breakpoint */
+@media (min-width: 1024px) {
+    .cards-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --- Card Base State & Entry Initialization --- */
+.animate-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f2ece4;
+    display: flex;
+    flex-direction: column;
+    
+    /* Animation Baseline Configuration */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--bezier), transform 0.8s var(--bezier), box-shadow 0.4s ease;
+}
+
+/* Structural Intersection Trigger State */
+.animate-card.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Interactive Hover Effects Layers --- */
+.animate-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(197, 160, 89, 0.18);
+    border-color: var(--gold);
+}
+
+.card-media {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: #e8e4df;
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--bezier);
+}
+
+/* Scale Image on Card Hover */
+.animate-card:hover .card-media img {
+    transform: scale(1.1);
+}
+
+.badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(22, 22, 22, 0.85);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 2;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, transparent 40%, rgba(22,22,22,0.4));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.animate-card:hover .hover-overlay {
+    opacity: 1;
+}
+
+.card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    font-size: 1.25rem;
+    color: var(--dark);
+    margin: 0 0 10px 0;
+    transition: color 0.3s ease;
+}
+
+.animate-card:hover .card-body h3 {
+    color: var(--gold);
+}
+
+.card-body p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+}
+
+/* Button Component Animations */
+.learn-more-btn {
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    transition: color 0.3s ease;
+}
+
+.learn-more-btn .arrow {
+    margin-left: 6px;
+    transition: transform 0.3s var(--bezier);
+}
+
+.animate-card:hover .learn-more-btn {
+    color: var(--gold);
+}
+
+.animate-card:hover .learn-more-btn .arrow {
+    transform: translateX(6px);
+}
